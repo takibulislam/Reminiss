@@ -1,0 +1,19 @@
+{
+  "name": "reminiss",
+  "version": "1.0.0",
+  "description": "A deeply personal app dedicated to the cherished memories we created together",
+  "license": "ISC",
+  "author": "Takibul",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "firebase": "^11.1.0",
+    "websocket": "^1.0.35",
+    "ws": "^8.18.0"
+  },
+  "keywords": []
+}

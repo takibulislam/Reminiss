@@ -13,6 +13,8 @@ socket.addEventListener("open", (Event) => {
 // onmessage | firess when client receives message from server
 socket.addEventListener("message", (message) => {
   console.log(`Message received from the server: ${message.data}`);
+  console.log(message);
+  socket.send(`HI im ${message.data.u}`);
 });
 
 // onclose | fires when connection closed

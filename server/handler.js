@@ -1,25 +1,31 @@
-import { type } from "node:os";
-import { json } from "node:stream/consumers";
 import { WebSocketServer } from "ws";
 import { generateClientID } from "./clientID.js";
-import { error } from "node:console";
+import url from "node:url";
+
 export function setupWebsocket(server) {
-  const wss = new WebSocketServer({ server });
+  const wsServer = new WebSocketServer({ server });
 
   // Store connected Clients
   const clients = [];
+  const connections = {};
 
   // Handling websocket connection
-  wss.on("connection", (ws) => {
+  wsServer.on("connection", (clientSocket, httpRequest) => {
     console.log("New Client connected");
+    console.log(clients.length);
 
-    // Assign ID to the client
-    clients.push(ws);
+    // Client ID + Username and adding it to the clientSocket.
     const clientID = generateClientID();
-    ws.clientID = clientID;
+    const { username } = url.parse(httpRequest.url, true).query;
+    clientSocket.clientDetails = {
+      clientID: clientID,
+      username: username,
+    };
+    console.log(username);
+    clients.push(clientSocket);
 
     // Server recive messags from client side.
-    ws.on("message", (data) => {
+    clientSocket.on("message", (data) => {
       console.log(`Message Recived from ${clientID}: `, data.toString());
 
       // Broadcast to all clients except sender
@@ -30,23 +36,26 @@ export function setupWebsocket(server) {
           message: data.toString(),
           Timestamp: new Date().toString(),
         }),
-        ws
+        clientSocket
       );
     });
 
     // Server respond to the client
-    ws.send(
+    clientSocket.send(
       JSON.stringify({
-        type: "system",
+        username: username,
         message: "Welcome to the chant",
         clientID: clientID,
-      })
+      }),
+      connections
     );
-    ws.on("close", () => {
-      console.log(`Client ${clientID}: is disconnected`);
+    clientSocket.on("close", () => {
+      console.log(
+        `Client ${clientSocket.clientDetails.username} ${clientSocket.clientDetails.clientID}is disconnected`
+      );
 
       // Remove client from array
-      const index = clients.indexOf(ws);
+      const index = clients.indexOf(clientSocket);
       if (index !== -1) {
         clients.splice(index, 1);
       }
@@ -61,11 +70,11 @@ export function setupWebsocket(server) {
       );
     });
 
-    ws.on("error", (error) => {
+    clientSocket.on("error", (error) => {
       console.error(`Error with client ${clientID}: `, error);
 
       // Remove client from array on error
-      const index = clients.indexOf(ws);
+      const index = clients.indexOf(clientSocket);
       if (index !== -1) {
         clients.splice(index, 1);
       }
@@ -79,6 +88,5 @@ export function setupWebsocket(server) {
         }
       });
     }
-    broadcastToAll();
   });
 }

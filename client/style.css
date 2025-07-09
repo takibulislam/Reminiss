@@ -1,0 +1,8 @@
+.container {
+  border: 1px solid black;
+  width: 700px;
+  height: 1000px;
+}
+.messages {
+  color: rgb(44, 25, 2);
+}

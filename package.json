@@ -1,17 +1,20 @@
 {
   "name": "reminiss",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A deeply personal app dedicated to the cherished memories we created together",
   "license": "ISC",
-  "author": "Takibul",
-  "type": "commonjs",
-  "main": "index.js",
+  "author": "TakibulIslam",
+  "type": "module",
+  "main": "server.js",
   "scripts": {
-    "test": "node index.js"
+    "test": "node server.js",
+    "start": "node --watch server.js"
   },
   "dependencies": {
     "express": "^4.21.2",
     "firebase": "^11.1.0",
+    "fs": "^0.0.1-security",
+    "uuid": "^11.1.0",
     "websocket": "^1.0.35",
     "ws": "^8.18.0"
   },

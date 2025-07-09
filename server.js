@@ -1,38 +1,20 @@
-const express = require("express"); // Import Express.js to serve static files
-const http = require("http"); // Import the HTTP module to create a server
-const WebSocket = require("ws"); // Import WebSocket for real-time signaling
-const path = require("path"); // Import path module to handle file paths
+import { createServer } from "node:http";
+import { setupWebsocket } from "./server/handler.js";
+import { readFile, readFileSync } from "node:fs";
 
-const app = express(); // Create an Express app
-const server = http.createServer(app); // Create an HTTP server using Express
-const wss = new WebSocket.Server({ server }); // Create a WebSocket server on top of the HTTP server
+const html = readFileSync("./client/index.html", "utf8");
 
-// 🔹 Serve the frontend (HTML, JS, CSS) from the "public" folder
-app.use(express.static(path.join(__dirname, "public")));
-
-// 🔹 WebSocket Server: Handle Client Connections
-wss.on("connection", (ws) => {
-  console.log("New client connected");
-
-  // Handle incoming messages from clients
-  ws.on("message", (message) => {
-    console.log("Received message:", message);
-
-    // Broadcast the message to all connected clients except the sender
-    wss.clients.forEach((client) => {
-      if (client !== ws && client.readyState === WebSocket.OPEN) {
-        client.send(message); // Relay the message (SDP, ICE candidates, etc.)
-      }
-    });
-  });
-
-  // Handle client disconnect event
-  ws.on("close", () => {
-    console.log("Client disconnected");
-  });
+// HTTP Server
+const server = createServer((req, res) => {
+  res.writeHead(200, "Content-Type", "text/plain");
+  console.log(`${req.method}`);
+  console.log(`${req.url}`);
+  res.end(html);
 });
 
-// 🔹 Start the HTTP & WebSocket server on port 3000
-server.listen(3000, () => {
-  console.log("Server running at http://localhost:3000");
+// Setting up websocket Server by passing the http server. this function contain websocket features in the handler.js file
+setupWebsocket(server);
+
+server.listen(8080, () => {
+  console.log("Server is running at port 8080");
 });

@@ -7,12 +7,28 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Hello</h1>
     <div class="container">
-      <div id="messageDiv">
-        <p class="messages">Frist Message</p>
+      <div id="chatDiv">
+        <div class="client-data">
+          <div id="name">Name</div>
+          <div id="Status"></div>
+        </div>
+        <div id="connection-update" class="connection-update"></div>
+        <div class="chat" id="chat">
+          <!-- <p class="display-chat">Hi, how are you doing</p> -->
+        </div>
+
+        <!-- chat input field -->
+        <div class="chat-input">
+          <input type="text" name="" id="input-chat" />
+          <button class="btn" id="send-btn">Send</button>
+        </div>
       </div>
     </div>
     <script src="app.js" type="module"></script>
+    <script
+      src="https://kit.fontawesome.com/c5a9405597.js"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

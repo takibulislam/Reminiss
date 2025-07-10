@@ -1,8 +1,60 @@
 .container {
   border: 1px solid black;
-  width: 700px;
-  height: 1000px;
+  padding: 1vw;
+  margin: 5%;
+}
+#chatDiv {
+  visibility: hidden;
 }
 .messages {
   color: rgb(44, 25, 2);
+}
+
+.client-data {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1vw 2vh;
+  background-color: rgb(16, 16, 16);
+  color: aliceblue;
+  font-size: 2.5vh;
+}
+.connection-update {
+  display: flex;
+  justify-content: center;
+  color: rgb(97, 98, 96);
+}
+.chat {
+  /* border: 1px solid tomato; */
+  height: 700px;
+  gap: 10px 10px;
+  /* max-height: 700px; */
+}
+.display-chat {
+  background-color: rgb(174, 198, 206);
+  margin: 1vh;
+  padding: 1vh;
+  border-radius: 5px;
+}
+.display-chat-client-B {
+  text-align: right;
+  background-color: rgb(206, 206, 174);
+}
+.fa-lightbulb {
+  font-size: 3vh;
+  padding: 5px;
+  border: 2px solid white;
+  border-radius: 20%;
+}
+#input-chat {
+  padding: 5px 10px;
+  margin: 5px 10px;
+  border-radius: 15px;
+  border: 1px solid tomato;
+}
+.btn {
+  padding: 5px 15px;
+  background-color: rgb(251, 227, 200);
+  border-radius: 15px;
+  border: 1px solid tomato;
 }

@@ -1,4 +1,4 @@
-# **Web Socket**
+# **_Web Socket_**
 
 A WebSocket is **a communication protocol that provides full-duplex, persistent, and bidirectional communication channels over a single TCP connection**. This bidirectional communication occurs between the client and server; there can be one or many clients, but all clients communicate with the server to send or receive messages to other clients.
 

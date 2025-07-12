@@ -17,11 +17,12 @@ export function setupWebsocket(server) {
     // Client ID + Username and adding it to the clientSocket.
     const clientID = generateClientID();
     const { username } = url.parse(httpRequest.url, true).query;
+
+    // console.log("UserName:", username);
     clientSocket.clientDetails = {
       clientID: clientID,
       username: username,
     };
-    console.log(username);
     clients.push(clientSocket);
 
     // Server recive messags from client side.
@@ -44,7 +45,7 @@ export function setupWebsocket(server) {
     clientSocket.send(
       JSON.stringify({
         username: username,
-        message: "Welcome to the chant",
+        message: "Server: Welcome to the chat",
         clientID: clientID,
       }),
       connections
@@ -64,7 +65,7 @@ export function setupWebsocket(server) {
       broadcastToAll(
         JSON.stringify({
           type: "system",
-          message: `User ${clientID} left the chat`,
+          message: `Server: User ${clientID} left the chat`,
           clientID: clientID,
         })
       );

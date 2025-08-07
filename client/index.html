@@ -8,23 +8,44 @@
   </head>
   <body>
     <div class="container">
-      <div id="chatDiv">
-        <div class="client-data">
-          <div id="name">Name</div>
-          <div id="Status"></div>
-        </div>
-        <div id="connection-update" class="connection-update"></div>
-        <div class="chat" id="chat">
-          <!-- <p class="display-chat">Hi, how are you doing</p> -->
+      <div class="title container-title">
+        <h1>Reminiss</h1>
+      </div>
+      <section>
+        <!-- Audio & Video Section  -->
+        <div class="call">
+          <!-- Video call -->
+          <div class="call-video"></div>
+          <!-- Audio Call  -->
+          <div class="call-controller">
+            <div class="profiles">
+              <div class="profiles-profile-1">
+                <img src="/images/users profile/user2.png" alt="" />
+                <p class="text-top">User 1</p>
+              </div>
+              <div class="profiles-profile-2">
+                <img src="/images/users profile/user2.png" alt="" />
+                <p class="text-top">User 2</p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- chat input field -->
-        <div class="chat-input">
-          <input type="text" name="" id="input-chat" />
-          <button class="btn" id="send-btn">Send</button>
+        <!--  -->
+        <!-- Chat Section -->
+        <div class="chat">
+          <div class="chat-render">
+            <p class="render-sender">Senders Text</p>
+            <p class="render-mytext">My Text</p>
+          </div>
+          <div class="chat-input">
+            <input type="text" name="" id="" />
+          </div>
         </div>
-      </div>
+      </section>
     </div>
+    <!-- gap -->
+    <!-- Script Section  -->
     <script src="app.js" type="module"></script>
     <script
       src="https://kit.fontawesome.com/c5a9405597.js"
